@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 // let initialState={}
 
 const AuthReducer = (state = {}, action)=>{
-    console.log(action)
+    
    const {type, payload} = action
    switch (type) {
        case SIGN_UP:
@@ -19,7 +19,7 @@ const AuthReducer = (state = {}, action)=>{
        default:
            break;
    }
-   console.log(state);
+   
     return state;
 }
 

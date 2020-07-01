@@ -67,7 +67,7 @@ import { LoginAction } from '../redux/action/AuthAction'
             Alert.alert("Login Successful ")
             this.props.navigation.navigate("Home",{data:this.state.data})
         }
-        const {username,password} = this.state
+        const {username,password} = this.state.data
             let loginData = {username,password}
             this.props.loginProp(loginData)
             console.log(loginData)

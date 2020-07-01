@@ -143,7 +143,7 @@ import { RegisterAction } from '../redux/action/AuthAction'
                 Alert.alert("Registration Successful ")
                 this.props.navigation.navigate("Login",{data:this.state.data})
             }
-            const {username,phone,email,password} = this.state
+            const {username,phone,email,password} = this.state.data
             let registerData = {username,phone,email,password}
             this.props.registerProp(registerData)
 
