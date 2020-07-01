@@ -1,0 +1,170 @@
+import React, { Component } from 'react'
+import { Text, View, FlatList, Image, Button, Modal, ImageBackground } from 'react-native'
+import carData from "../../service/carData"
+import styles from "./styles"
+
+
+export default class CustomList extends Component {
+    state = {
+        isOpen:"false",
+        data:{}
+    }
+    
+    renderItem = ({item})=>{
+        return (
+            <View  style={styles.container}>
+                {/* <View style={styles.image}> */}
+                    <Image 
+                        source={item.img}
+                        style={{
+                            width: 200,
+                            height:200
+                        }}
+                       resizeMode="contain"
+
+
+
+                    />
+                {/* </View> */}
+                <View style={styles.text}>
+                    <Text >  {item.brand}</Text>
+                    <Text >  {item.price} </Text>
+                    <Text >  {item.details} </Text>
+                    <Button onPress={()=>this.toggleModal({brand:item.brand,price:item.price,details:item.details,img:item.img})} title="view more"/>
+
+                </View>
+            </View>
+
+        )
+    }
+    keyExtractor = ({id})=>id
+
+    seperator = ()=>{
+        return(
+            <Text></Text>
+        )
+    }
+    toggleModal = (info)=>{
+        this.setState({
+            // isOpen:this.state.isOpen ? false : true, or
+            isOpen : !this.state.isOpen,
+            data:info,
+        })
+    }
+    render() {
+        return (
+            <ImageBackground
+                source={require("../../assets/bg.jpg")}
+                style={{flex:1}}
+                resizeMode="contain"
+            >
+
+                <View>
+                    <FlatList
+                        data = {carData}
+                        renderItem={this.renderItem}
+                        keyExtractor={this.keyExtractor}
+                        ItemSeparatorComponent={this.seperator}
+                    />
+                    <Modal
+                        visible = {this.state.isOpen}
+                        transparent={true}
+                        onRequestClose={this.toggleModal}
+
+                    
+                    >
+                        <View style={{backgroundColor:"yellow",flex:1,marginVertical:200,marginHorizontal:20}}>
+                            <Image source={this.state.data.img}
+                                style={{
+                                width:350,
+                                height:250,
+                                padding:10,
+                                marginLeft:15
+
+                                }}
+                                resizeMode="contain"
+                            />
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>Car Brand :<Text> {this.state.data.brand} </Text> </Text>
+                                <Text style={styles.modalText}>Price :<Text> {this.state.data.price} </Text> </Text>
+                                <Text style={styles.modalText}>Desciption : <Text> {this.state.data.details} </Text></Text>
+
+                            </View>
+                            <Button onPress={()=>this.toggleModal("")} title="Close" />
+                        </View>
+
+
+
+
+                    </Modal>
+                    
+                </View>
+            </ImageBackground>
+        )
+    }
+}
+
+
+
+
+import React, { Component } from 'react'
+import { Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native'
+import MyTextInput from "../components/MyTextInput"
+import Container from '../components/Container'
+import MyTouchHighlight from '../components/MyTouchHighlight.js'
+
+
+export default class Home extends Component {
+    state = {
+        data:{}
+    }
+    changeText = (value)=>{
+        this.setState(prevState=>{
+            return{
+                data:{
+                    ...prevState.data,
+                    ...value
+                }
+            }
+        })
+    }
+    // pressButton = ()=>{
+    //     this.props.navigation.navigate("About")
+    // }
+    render() {
+        return (
+            <ImageBackground
+                source={require("../assets/bday1.gif")}
+                style={{flex:1}}
+                
+            >
+                <Container>
+                    <Text>{this.state.data.name}</Text>
+                    <Text>{this.state.data.phone}</Text>
+                    <Text>{this.state.data.email}</Text>
+
+                    <MyTextInput 
+                        placeholder="Enter Name"
+                        keyboardType="default"
+                        onChangeText={(e)=>this.changeText({name: e})}
+                    />
+                    <MyTextInput 
+                        placeholder="Enter Phone"
+                        keyboardType="numeric"
+                        onChangeText={(e)=>this.changeText({phone: e})}
+                       
+                    />
+                    <MyTextInput 
+                        placeholder="Enter Email Address"
+                        keyboardType="email-address"
+                        onChangeText={(e)=>this.changeText({email: e})}
+                    />
+                    <MyTouchHighlight show="Register" onButton={()=>this.pressButton()} />
+               
+           
+                </Container>
+            </ImageBackground>
+        )
+    }
+}
+
