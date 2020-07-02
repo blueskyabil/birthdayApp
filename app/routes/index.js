@@ -7,6 +7,7 @@ import Home from '../screens/Home';
 import CardSender from "../screens/CardSender"
 import Login from "../screens/Login"
 
+
 const Stack = createStackNavigator ();
 
 const ScreenComponent = () => (
@@ -48,6 +49,7 @@ const ScreenComponent = () => (
     </Stack.Navigator>
 )
 export default ()=>(
+
     <NavigationContainer>
         <ScreenComponent />
     </NavigationContainer>

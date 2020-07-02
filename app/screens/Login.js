@@ -8,6 +8,9 @@ import styles from "../components/MyTextInput/styles"
 import { connect } from 'react-redux'
 import { LoginAction } from '../redux/action/AuthAction'
 
+import { Container, Header, Content, Form, Item, Input, Label, Icon } from 'native-base';
+
+
 
  class Login extends Component {
     state={
@@ -137,10 +140,51 @@ import { LoginAction } from '../redux/action/AuthAction'
                 />
                 <Text style={styles.errorText}>{this.state.error.password}</Text>
                 </View>
+                
                 <MyTouchHighlight show="Login" onButton={()=>this.handleLogin()} />
                 <MyTouchHighlight show="Register" onButton={()=>this.pressButton()} />
             </LoginContainer>
         )
+
+        // return (
+        //     <Container style={{alignContent:"center",justifyContent:"center",paddingTop:100}}>
+        //         <Header />
+
+        //         <Content>
+
+        //         <Form>
+
+        //             <Item floatingLabel>
+        //                 <Label>Username</Label>
+
+        //                 <Input 
+        //                     keyboardType="default"
+        //                     onChangeText={(username)=>this.changeInput({username})}
+        //                     value={this.state.data.username}
+        //                     />
+                            
+
+        //             </Item>
+
+        //             <Item floatingLabel last>
+
+        //                 <Label>Password</Label>
+
+        //                 <Input 
+        //                     keyboardType="default"
+        //                     secureTextEntry={true}
+        //                     onChangeText={(password)=>this.changeInput({password})}
+        //                     value={this.state.data.password}
+        //                 />
+
+        //             </Item>
+
+        //         </Form>
+
+        //       </Content>
+
+        //     </Container>
+        //   );
     }
 }
 
