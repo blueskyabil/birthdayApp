@@ -1,34 +1,38 @@
-import React, {Component} from 'react';
-import {ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
-import _ from 'lodash';
-import {AnimatedImage, Colors} from 'react-native-ui-lib'; //eslint-disable-line
+import React from 'react';
+import { View, Image,Text } from 'react-native';
+import CardImages from '../components/CardImages';
+import { Card } from 'react-native-paper';
 
-const SampleImages = [
-  'https://static.pexels.com/photos/50721/pencils-crayons-colourful-rainbow-50721.jpeg',
-  'https://static.pexels.com/photos/60628/flower-garden-blue-sky-hokkaido-japan-60628.jpeg'
-];
 
-export default class AnimatedImageScreen extends Component {
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        {_.map(SampleImages, (image, index) => (
-          <AnimatedImage
-            containerStyle={{backgroundColor: Colors.blue50, marginBottom: 10}}
-            style={{resizeMode: 'cover', height: 250}}
-            source={{uri: image}}
-            loader={<ActivityIndicator />}
-            key={index}
-            animationDuration={index === 0 ? 300 : 800}
-          />
-        ))}
-      </ScrollView>
-    );
+class CardSender extends React.Component {
+    state={
+      data:false
+    }
+    componentDidMount(){
+      this.setState({
+          data:this.props.route.params.img
+      })
   }
+    render() {
+      if (this.state.data ) {
+        return (
+          
+            <Card>
+              <Card.Cover source={this.state.data} />
+              
+          </Card>
+          
+          
+        )
+      } 
+      return(
+        <View>
+          <Text>Loading</Text>
+        </View>
+      )
+      
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});
+export default CardSender
+
