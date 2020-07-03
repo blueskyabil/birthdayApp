@@ -16,7 +16,8 @@ export default StyleSheet.create({
     imageCont:{
         backgroundColor:"red",
         width:200,
-        height:200
+        height:200,
+        marginBottom:1000
        
     },
     image:{

@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Image,Text } from 'react-native';
 import CardImages from '../components/CardImages';
-import { Card } from 'react-native-paper';
+import MyComponent from '../components/ActivityIndicator';
+import styles from "../components/styles/index"
+
+
 
 
 class CardSender extends React.Component {
@@ -13,21 +16,33 @@ class CardSender extends React.Component {
           data:this.props.route.params.img
       })
   }
+  
     render() {
       if (this.state.data ) {
         return (
-          
-            <Card>
-              <Card.Cover source={this.state.data} />
-              
-          </Card>
+          <View style={styles.imgContainer}>
+            <View style={styles.imageCont}>
+              <View style={{backgroundColor:"red"}}>
+                <Image 
+                source={this.state.data}
+                resizeMode="contain"
+                style={styles.image}
+                />
+                
+              </View>
+             
+            </View>
+
+
+          </View>
+      
           
           
         )
       } 
       return(
         <View>
-          <Text>Loading</Text>
+          <Text>Loading</Text> 
         </View>
       )
       
